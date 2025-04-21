@@ -1,0 +1,136 @@
+<% layout('layouts/boilerplate') %>
+<div class="top">
+  <div class="left" id="left">
+    <i class="fa-solid fa-chevron-left"></i>
+  </div>
+  <div class="filters">
+    <div class="filter" id="filter">
+      <i class="fa-solid fa-fire-flame-curved"></i>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-bed"></i>
+      <p>Room</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-city"></i>
+      <p>Iconic City</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-person-swimming"></i>
+      <p>Amaziong Pool</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-campground"></i>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-tractor"></i>
+      <p>Farms</p>  
+    </div>
+  </div>
+  <div class="right" id="right">
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  <div class="tax-info">
+    <div class="form-check form-switch form-check-reverse">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="switchCheckDefault"
+      />
+      <label class="form-check-label" for="switchCheckDefault">After tax</label>
+    </div>
+  </div>
+</div>
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-xs-1 mt-3">
+  <%for(data of allData){%>
+  <a href="/listings/<%=data.id%>" class="cards-link">
+    <div class="card col listing-card">
+      <img
+        src="<%= data.image.url %>"
+        class="card-img-top"
+        alt="listings image"
+        style="height: 20rem"
+      />
+      <div class="card-img-overlay"></div>
+      <div class="card-body">
+        <div class="card-text" id="priceAndTitle">
+          <p><b> <%= data.title %> </b></p>
+          <p class="price"><%= data.price %></p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <%}%>
+</div>
+
+<script>
+  const checkbox = document.getElementById("switchCheckDefault");
+      const data = <%- JSON.stringify(allData) %>;
+      const prices = document.getElementsByClassName("price");
+
+      checkbox.addEventListener("change", function () {
+        for (let i = 0; i < prices.length; i++) {
+          const originalPrice = Number(data[i].price);
+          if (this.checked) {
+            const newPrice = Math.round(originalPrice + (originalPrice * 0.18));
+            prices[i].innerText = `₹${newPrice} /night`;
+          } else {
+            prices[i].innerText = `₹${originalPrice} /night`;
+          }
+        }
+      });
+
+      for (let i = 0; i < prices.length; i++) {
+        const originalPrice = Number(data[i].price);
+        prices[i].innerText = `₹${originalPrice} /night`;
+      }
+
+const rightArrow = document.getElementById("right");
+const leftArrow = document.getElementById("left");
+const filter = document.getElementsByClassName("filter");
+const filterId = document.getElementById("filter");
+
+const mediaQuery = window.matchMedia("(max-width: 600px)");
+
+function handleChange(e) {
+  rightArrow.style.display = e.matches ? "inline" : "none";
+}
+
+handleChange(mediaQuery);
+mediaQuery.addEventListener("change", handleChange);
+
+function updateLeftArrowVisibility() {
+  if (
+    filterId.classList.contains("hundred") ||
+    filterId.classList.contains("oneFifty")
+  ) {
+    leftArrow.style.display = "inline";
+  } else {
+    leftArrow.style.display = "none";
+  }
+}
+
+rightArrow.addEventListener("click", () => {
+  for (let fil of filter) {
+    if (fil.classList.contains("hundred")) {
+      fil.classList.add("oneFifty");
+    }
+    fil.classList.add("hundred");
+  }
+  updateLeftArrowVisibility();
+});
+
+leftArrow.addEventListener("click", () => {
+  for (let fil of filter) {
+    if (fil.classList.contains("oneFifty")) {
+      fil.classList.remove("oneFifty");
+    } else if (fil.classList.contains("hundred")) {
+      fil.classList.remove("hundred");
+    }
+  }
+  updateLeftArrowVisibility();
+});
+</script>

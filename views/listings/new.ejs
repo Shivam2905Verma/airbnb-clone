@@ -1,0 +1,134 @@
+<% layout('layouts/boilerplate') %>
+<body>
+  <div class="row">
+    <div class="col-8">
+      <h1>Create a New Listing</h1>
+      <form method="post" action="/listings"  novalidate  class="needs-validation" enctype="multipart/form-data">
+        <div>
+          <label for="title" class="form-label"><b>Title</b></label>
+          <input
+            name="listing[title]"
+            type="text"
+            placeholder="Enter Title"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Please enter Title</div>
+          <div class="valid-feedback">Title Looks Good</div>
+        </div>
+        <br />
+        <div>
+          <label for="description" class="form-label"><b>Description</b></label>
+          <textarea
+            name="listing[description]"
+            type="text"
+            placeholder="Description"
+            class="form-control"
+            required
+          ></textarea>
+          <div class="invalid-feedback">Please enter a Short Description</div>
+        </div>
+        <div>
+          <label for="image" class="form-label"><b>Upload image</b></label>
+          <input
+            name="listing[url]"
+            type="file"
+            class="form-control"
+            required
+          />
+        </div>
+        <br />
+        <br />
+        <div>
+          <div class="row">
+            <div class="col-md-4">
+              <label for="price" class="form-label"><b>Price</b></label>
+              <input
+                name="listing[price]"
+                type="number"
+                placeholder="Price"
+                class="form-control"
+                required
+                min="0"
+              />
+          <div class="invalid-feedback">Please Enter the Price</div>
+            </div>
+            <br />
+            <br />
+            <br />
+
+            <div class="col-md-8">
+              <label for="country" class="form-label"><b>Country</b></label>
+              <input
+                name="listing[country]"
+                type="text"
+                placeholder="Country"
+                class="form-control"
+                required
+              />
+          <div class="invalid-feedback">Please Enter the country Name</div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div>
+          <label for="location" class="form-label"><b>Location</b></label>
+          <input
+          id="locationInput"
+            name="listing[location]"
+            type="text"
+            placeholder="Location"
+            class="form-control"
+            required
+          />
+          <ul id="suggestions" class="list-group mt-1" style="position: absolute; z-index: 1000;"></ul>
+          <div class="invalid-feedback">Please Enter the Valid Location</div>
+        </div>
+        <br />
+        <br />
+
+        <button class="btn btn-dark updatebtn">Add</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    const input = document.getElementById('locationInput');
+    const suggestionsBox = document.getElementById('suggestions');
+  
+    input.addEventListener('input', async () => {
+      const query = input.value.trim();
+  
+      if (query.length < 3) {
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+  
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`);
+      const data = await res.json();
+  
+      suggestionsBox.innerHTML = ''; // Clear previous suggestions
+  
+      data.slice(0, 5).forEach(place => {
+        const li = document.createElement('li');
+        li.textContent = place.display_name;
+        li.classList.add('list-group-item', 'list-group-item-action');
+        li.style.cursor = 'pointer';
+  
+        li.addEventListener('click', () => {
+          input.value = place.display_name;
+          suggestionsBox.innerHTML = '';
+        });
+  
+        suggestionsBox.appendChild(li);
+      });
+    });
+  
+    // Hide suggestions when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!suggestionsBox.contains(e.target) && e.target !== input) {
+        suggestionsBox.innerHTML = '';
+      }
+    });
+  </script>
+  
+</body>

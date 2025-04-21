@@ -1,0 +1,208 @@
+* {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 1;
+}
+
+.navbar {
+  height: 5rem;
+  background-color: white !important; 
+  margin-bottom: 1rem;
+  transition: all ease 0.5s;
+}
+
+.fa-compass {
+  color: #fe424d;
+  font-size: 2rem;
+}
+
+.nav-link {
+  color: black;
+}
+
+.f-info-link a {
+  text-decoration: none;
+  color: black;
+}
+
+.f-info-link a:hover {
+  text-decoration: underline;
+}
+
+.f-info-link,
+.f-info-social,
+.f-info-link {
+  margin: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.f-info-social i {
+  font-size: 1.2rem;
+}
+
+.footer-info {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #ebebeb;
+  /* margin-top: 0.5rem; */
+}
+
+.row {
+  display: flex;
+}
+
+.listing-card {
+  border: none;
+  margin-bottom: 1rem;
+}
+
+.card-img-top {
+  border-radius: 1rem;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.cards-link {
+  text-decoration: none;
+}
+
+.card-img-overlay {
+  opacity: 0;
+}
+
+.card-img-overlay:hover {
+  opacity: 0.2;
+  background-color: white;
+}
+
+.navbar-big {
+  height: 25vh;
+  transition: all ease-in-out 0.3s;
+}
+
+.addbtn,
+.updatebtn,
+.editbtn {
+  background-color: #fe424d;
+  border: none;
+}
+
+.show-image {
+  height: 50vh;
+}
+
+#map {
+  height: 20vh;
+  width: 55vw;
+}
+
+#priceAndTitle {
+  line-height: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  gap: 2rem;
+}
+
+.filter {
+  position: relative;
+  text-align: center;
+  opacity: 0.7;
+  right: 0%;          
+  transition: right 0.4s ease-in;
+}
+
+.filter i,
+p {
+  font-size: 1.2rem;
+}
+
+.filter:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.tax-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid rgb(78, 75, 75);
+  padding: 1vw;
+  height: 3rem;
+  border-radius: 1rem;
+  position: relative;
+  bottom: 10px;
+}
+
+.right {
+  font-size: 1.3rem;
+  position: relative;
+  bottom: 10px;
+  display: none;
+}
+.left {
+  font-size: 1.3rem;
+  position: relative;
+  bottom: 10px;
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .filter i,
+  p {
+    font-size: 1rem;
+  }
+
+  .hundred {
+    right: 110%;
+  }
+  .oneFifty {
+    right: 160%;
+  }
+
+  .tax-info {
+    padding: 0vw;
+    width: 15rem;
+    height: 2.5rem;
+  }
+
+  .form-check-label {
+    font-size: 0.7rem;
+    text-align: center;
+  }
+  #switchCheckDefault {
+    font-size: 0.7rem;
+    position: relative;
+    top: 5px;
+  }
+}

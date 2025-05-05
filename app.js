@@ -20,7 +20,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
-const dbUrl = process.env.ATLAS_MONGO;
+// const dbUrl = process.env.ATLAS_MONGO;
+const dbUrl = "mongodb://localhost:27017/wonderlust";
 
 main()
   .then(() => {

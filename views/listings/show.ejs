@@ -1,10 +1,10 @@
 <% layout('layouts/boilerplate') %>
 <body>
   <div class="row">
-    <div class="col-6">
+    <div class="col-6 particular-data-title">
       <h1><b> <%= particularData.title %></b></h1>
     </div>
-    <div class="card listing-card col-10">
+    <div class="card listing-card-show listing-card col-10">
       <img
         src="<%= particularData.image.url %>"
         class="card-img-top show-image"
@@ -122,7 +122,7 @@
     <div class="row">
       <h4>All Reviews</h4>
       <% for(review of particularData.reviews){ %>
-      <div class="card col-5 ms-3 mb-3">
+      <div class="card reviewcard col-5 ms-3 mb-3">
         <div class="card-body">
           <h5 class="card-title">@<%=review.author.username%></h5>
           <p
@@ -144,7 +144,7 @@
       <%}%>
     </div>
     <%}%>
-    <div class="col-8 mb-3">
+    <div class="col-8 map mb-3">
       <div id="map"></div>
     </div>
   </div>
